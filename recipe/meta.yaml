@@ -1,17 +1,17 @@
 {% set name = "sip" %}
-{% set version = "6.6.2" %}
+{% set version = "6.7.12" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 0e3efac1c5dfd8e525ae57140927df26993e13f58b89d1577c314f4105bfd90d
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/sip-{{ version }}.tar.gz
+  sha256: 08e66f742592eb818ac8fda4173e2ed64c9f2d40b70bee11db1c499127d98450
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv  # [win]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation  # [win]
   run_exports:
     - {{ pin_subpackage('sip', max_pin='x.x') }}
   entry_points:
@@ -31,13 +31,13 @@ requirements:
   host:
     - python
     - pip
-    - packaging
-    - toml
+    - setuptools
+    - wheel
   run:
     - python
     - packaging
-    - toml
     - ply
+    - tomli  # [py<311]
 
 test:
   requires:
@@ -47,7 +47,12 @@ test:
     - pip
   commands:
     - pip check
+    - sip-distinfo --help
+    - sip-module --help
     - sip-build --help
+    - sip-install --help
+    - sip-sdist --help
+    - sip-wheel --help
   imports:
     - sipbuild
   files:
@@ -66,6 +71,7 @@ about:
     used to create bindings for any C or C++ library. For example it is
     also used to generate wxPython, the Python bindings for wxWidgets.
   doc_url: https://www.riverbankcomputing.com/software/sip/
+  dev_url: https://www.riverbankcomputing.com/software/sip/
 
 extra:
   recipe-maintainers:
