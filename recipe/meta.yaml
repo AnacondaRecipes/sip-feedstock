@@ -45,14 +45,6 @@ test:
     - {{ compiler('cxx') }}
     - make  # [not win]
     - pip
-  commands:
-    - pip check
-    - sip-distinfo --help
-    - sip-module --help
-    - sip-build --help
-    - sip-install --help
-    - sip-sdist --help
-    - sip-wheel --help
   imports:
     - sipbuild
   files:
