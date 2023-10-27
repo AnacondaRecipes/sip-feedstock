@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation  # [win]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   run_exports:
     - {{ pin_subpackage('sip', max_pin='x.x') }}
   entry_points:
@@ -24,10 +24,7 @@ build:
 
 requirements:
   build:
-    - python
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - make  # [not win]
   host:
     - python
     - pip
