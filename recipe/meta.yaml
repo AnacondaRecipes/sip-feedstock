@@ -38,6 +38,7 @@ requirements:
     - packaging
     - ply
     - tomli  # [py<311]
+    - setuptools # [py>=310]
 
 test:
   requires:
